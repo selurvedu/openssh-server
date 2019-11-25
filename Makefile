@@ -56,4 +56,4 @@ enter:
 	@ID=$$(docker ps | grep -F "$(NAME):$(VERSION)" | awk '{ print $$1 }') && \
                 if test "$$ID" = ""; then echo "Container is not running."; exit 1; fi && \
                 PID=$$(docker inspect --format {{.State.Pid}} $$ID) && \
-                SHELL=/bin/bash sudo -E build/bin/nsenter --target $$PID --mount --uts --ipc --net --pid
+                SHELL=/bin/bash sudo -E nsenter --target $$PID --mount --uts --ipc --net --pid
